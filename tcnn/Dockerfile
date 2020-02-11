@@ -1,4 +1,4 @@
-FROM bvlc/caffe:cpu
+FROM bvlc/caffe:gpu
 COPY . /workspace/
 RUN wget -O tcnn3.caffemodel.tar https://storage.googleapis.com/tcnn-caffemodels/tcnn3.caffemodel.tar && tar -xvf tcnn3.caffemodel.tar
 RUN mkdir /workspace/data/
