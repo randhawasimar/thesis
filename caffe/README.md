@@ -4,4 +4,6 @@
 * Upgrading the original source code to run with CUDA 10.2
 
 ## Building Caffe container
+```
 docker build . -t caffe:cuda-10.2
+```
