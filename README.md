@@ -1,7 +1,9 @@
 # Thesis Project
 ## How to build
-* Build caffe container. Refer [instructions](caffe/README.md#building-caffe-container).
-* Build tcnn container. Refer [instructions](tcnn/README.md#building-tcnn-container).
+* `./build.sh`
+* Build caffe container. Refer detailed [instructions](caffe/README.md#building-caffe-container) for custom builds.
+* Build tcnn container. Refer detailed [instructions](tcnn/README.md#building-tcnn-container) for custom builds.
 ## How to run
-* Refer [instructions](tcnn/README.md#running-tcnn-container)
+* `./run.sh`
+* Refer detailed [instructions](tcnn/README.md#running-tcnn-container) for custom runs.
 

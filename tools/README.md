@@ -60,11 +60,10 @@
 
 ### INPUT:
 * Input Directory -I, --input-dir
-* Output Directory -O, --output-dir
 * Number of Folds -N, --num-folds
 * Randomization Seed -S, --seed
 
-### Directory Structure Format (Input):
+### Directory Structure Format (Before):
 ```
   ./<class 1>
     ./<img 1>.jpg
@@ -76,8 +75,16 @@
   ./<class n>
 ```
 
-### Directory Structure Format (Output):
+### Directory Structure Format (After):
 ```
+  ./<class 1>
+    ./<img 1>.jpg
+    ./<img 2>.jpg
+    ...
+    ./<img m>.jpg
+  ./<class 2>
+  ...
+  ./<class n>
   test1.txt
   train1.txt
   ...

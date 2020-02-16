@@ -15,13 +15,11 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Crops SROI (Sub-Region-of-Interest) images from larger ROI images.')
 parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1)
-parser.add_argument('-O', '--output-dir', dest='output_dir', type=str, nargs=1)
 parser.add_argument('-N', '--num-folds', dest='num_folds', type=int, nargs=1)
 parser.add_argument('-S', '--seed', dest='seed', type=int, nargs=1)
 args = parser.parse_args()
 
 input_dir = args.input_dir[0]
-output_dir = args.output_dir[0]
 num_folds = args.num_folds[0]
 seed = args.seed[0]
 
@@ -43,14 +41,14 @@ for class_name in os.listdir(input_dir):
     for image_file in os.listdir(input_dir + '/' + class_name):
         if not (image_file.endswith('.jpg') or image_file.endswith('.png')):
             continue
-        img_list.append(input_dir + '/' + image_file)
+        img_list.append('./' + class_name + '/' + image_file)
 
 # remove pre-existing train/test files
 for i in range(1, num_folds + 1):
-    trainfile = output_dir + 'train' + str(i) + '.txt'
+    trainfile = input_dir + '/train' + str(i) + '.txt'
     if os.path.exists(trainfile):
         os.remove(trainfile)
-    testfile = output_dir + 'test' + str(i) + '.txt'
+    testfile = input_dir + '/test' + str(i) + '.txt'
     if os.path.exists(testfile):
         os.remove(testfile)
 
@@ -67,9 +65,9 @@ for class_name, img_list in class_to_img.items():
     img_list_index = 0
     # populate train/test files
     for i in range(1, num_folds + 1):
-        trainfile = output_dir + 'train' + str(i) + '.txt'
+        trainfile = input_dir + '/train' + str(i) + '.txt'
         trainfile_handler = open(trainfile, "a") 
-        testfile = output_dir + 'test' + str(i) + '.txt'
+        testfile = input_dir + '/test' + str(i) + '.txt'
         testfile_handler = open(testfile, "a") 
         # determine range of img_list indexes to be written in train fold
         img_list_train_range_left = img_list_index
