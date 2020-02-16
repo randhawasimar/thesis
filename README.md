@@ -1,13 +1,7 @@
-# thesis
-## TCNN Parameters
-### REQUIRED
-* mount data directory at target: /workspace/data/
-### OPTIONAL
-* mount model directory at target: /model/
-* env var for create_kth.sh script: RESIZE 
+# Thesis Project
+## How to build
+* Build caffe container. Refer [instructions](caffe/README.md#building-caffe-container).
+* Build tcnn container. Refer [instructions](tcnn/README.md#building-tcnn-container).
+## How to run
+* Refer [instructions](tcnn/README.md#running-tcnn-container)
 
-## Building TCNN container
-docker build . -t tcnn-trainer
-
-## Running TCNN container
-docker run -v <data-directory-on-host>:/workspace/data/ tcnn-trainer
