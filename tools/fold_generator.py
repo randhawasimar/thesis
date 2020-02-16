@@ -1,0 +1,93 @@
+import logging
+import os
+import sys
+
+frmt = logging.Formatter(
+    "%(asctime)s - %(levelname)s - %(processName)s (%(process)s) - %(threadName)s - %(module)s - %(filename)s - %(lineno)d - "
+    "%(message)s", "%Y-%m-%d %H:%M:%S %Z")
+h1 = logging.StreamHandler(sys.stdout)
+h1.setFormatter(frmt)
+log = logging.getLogger()
+log.setLevel('INFO')
+log.addHandler(h1)
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Crops SROI (Sub-Region-of-Interest) images from larger ROI images.')
+parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1)
+parser.add_argument('-O', '--output-dir', dest='output_dir', type=str, nargs=1)
+parser.add_argument('-N', '--num-folds', dest='num_folds', type=int, nargs=1)
+parser.add_argument('-S', '--seed', dest='seed', type=int, nargs=1)
+args = parser.parse_args()
+
+input_dir = args.input_dir[0]
+output_dir = args.output_dir[0]
+num_folds = args.num_folds[0]
+seed = args.seed[0]
+
+
+import random
+
+random.seed(seed)
+
+class_to_img = dict()
+
+# Iterate over class directories in input_dir
+for class_name in os.listdir(input_dir):
+    if not os.path.isdir(input_dir + '/' + class_name):
+        continue
+    
+    img_list = list()
+    class_to_img[class_name] = img_list
+    # Iterate over images in a class directory
+    for image_file in os.listdir(input_dir + '/' + class_name):
+        if not (image_file.endswith('.jpg') or image_file.endswith('.png')):
+            continue
+        img_list.append(input_dir + '/' + image_file)
+
+# remove pre-existing train/test files
+for i in range(1, num_folds + 1):
+    trainfile = output_dir + 'train' + str(i) + '.txt'
+    if os.path.exists(trainfile):
+        os.remove(trainfile)
+    testfile = output_dir + 'test' + str(i) + '.txt'
+    if os.path.exists(testfile):
+        os.remove(testfile)
+
+# maintain class index
+class_index = 0
+for class_name, img_list in class_to_img.items():
+    # shuffle img_list
+    random.shuffle(img_list)
+    # these many minimum entries to write per fold
+    num_min_entries_per_fold = int(len(img_list)/num_folds)
+    # these many extra entries to write for all folds
+    num_extra_entries_all_folds = len(img_list)%num_folds
+    # intialize img_list index
+    img_list_index = 0
+    # populate train/test files
+    for i in range(1, num_folds + 1):
+        trainfile = output_dir + 'train' + str(i) + '.txt'
+        trainfile_handler = open(trainfile, "a") 
+        testfile = output_dir + 'test' + str(i) + '.txt'
+        testfile_handler = open(testfile, "a") 
+        # determine range of img_list indexes to be written in train fold
+        img_list_train_range_left = img_list_index
+        img_list_train_range_right = img_list_index + num_min_entries_per_fold + (1 if num_extra_entries_all_folds else 0) - 1
+        # increment img_list_index
+        img_list_index = img_list_train_range_right + 1
+        log.debug('img_list_train_range_left: ' + str(img_list_train_range_left) + ', img_list_train_range_right: ' + str(img_list_train_range_right))
+        for j in range(len(img_list)):
+            if j < img_list_train_range_left or j > img_list_train_range_right:
+                # write in test file
+                testfile_handler.write(img_list[j] + ' ' + str(class_index) + '\n')
+            else:
+                # write in train file
+                trainfile_handler.write(img_list[j] + ' ' + str(class_index) + '\n')
+        # close train/test file handlers
+        trainfile_handler.close()
+        testfile_handler.close()
+
+    # increment class index before moving to the next class
+    class_index = class_index + 1
+
