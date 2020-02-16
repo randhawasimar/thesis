@@ -35,7 +35,7 @@ for sub_dir in os.listdir(input_dir):
             img_png = img_with_ext
             img = img_png.rstrip('.png')
             img_jpg = img + '.jpg'
-            bashCommand = 'convert ' + input_dir + '/' + sub_dir + '/' + img_png + output_dir + '/' + sub_dir + '/' + img_jpg  
+            bashCommand = 'convert ' + input_dir + '/' + sub_dir + '/' + img_png + ' ' + output_dir + '/' + sub_dir + '/' + img_jpg  
             process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
             output, error = process.communicate()
             if error:
