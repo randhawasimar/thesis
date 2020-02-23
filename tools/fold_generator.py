@@ -14,9 +14,9 @@ log.addHandler(h1)
 import argparse
 
 parser = argparse.ArgumentParser(description='Crops SROI (Sub-Region-of-Interest) images from larger ROI images.')
-parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1)
-parser.add_argument('-N', '--num-folds', dest='num_folds', type=int, nargs=1)
-parser.add_argument('-S', '--seed', dest='seed', type=int, nargs=1)
+parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1, required=True)
+parser.add_argument('-N', '--num-folds', dest='num_folds', type=int, nargs=1, required=True)
+parser.add_argument('-S', '--seed', dest='seed', type=int, nargs=1, required=True)
 args = parser.parse_args()
 
 input_dir = args.input_dir[0]

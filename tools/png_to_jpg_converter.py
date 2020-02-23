@@ -14,8 +14,8 @@ log.addHandler(h1)
 import argparse
 
 parser = argparse.ArgumentParser(description='Converts PNG images in all sub-directories (1-level deep) to JPG. Retains the original Directory hierarchy (only 1-level deep) in the output.')
-parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1)
-parser.add_argument('-O', '--output-dir', dest='output_dir', type=str, nargs=1)
+parser.add_argument('-I', '--input-dir', dest='input_dir', type=str, nargs=1, required=True)
+parser.add_argument('-O', '--output-dir', dest='output_dir', type=str, nargs=1, required=True)
 args = parser.parse_args()
 
 input_dir = args.input_dir[0]
