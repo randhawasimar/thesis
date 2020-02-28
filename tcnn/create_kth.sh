@@ -39,67 +39,15 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     $VAL_DATA_ROOT \
-    $DATA/test1.txt \
-    $EXAMPLE/kth_test1_lmdb
+    $DATA/test.txt \
+    $EXAMPLE/kth_test_lmdb
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $VAL_DATA_ROOT \
-    $DATA/train1.txt \
-    $EXAMPLE/kth_train1_lmdb
+    $DATA/train.txt \
+    $EXAMPLE/kth_train_lmdb
 
-# Fold 2
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    $VAL_DATA_ROOT \
-    $DATA/test2.txt \
-    $EXAMPLE/kth_test2_lmdb
-
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $VAL_DATA_ROOT \
-    $DATA/train2.txt \
-    $EXAMPLE/kth_train2_lmdb
-
-# Fold 3
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    $VAL_DATA_ROOT \
-    $DATA/test3.txt \
-    $EXAMPLE/kth_test3_lmdb
-
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $VAL_DATA_ROOT \
-    $DATA/train3.txt \
-    $EXAMPLE/kth_train3_lmdb
-
-# Fold 4
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    $VAL_DATA_ROOT \
-    $DATA/test4.txt \
-    $EXAMPLE/kth_test4_lmdb
-
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $VAL_DATA_ROOT \
-    $DATA/train4.txt \
-    $EXAMPLE/kth_train4_lmdb
-
-# Link one fold
-ln -s kth_test1_lmdb $EXAMPLE/kth_test_lmdb
-ln -s kth_train1_lmdb $EXAMPLE/kth_train_lmdb
-
-echo "lmdbs created, fold 1 linked."
+echo "lmdbs created."
