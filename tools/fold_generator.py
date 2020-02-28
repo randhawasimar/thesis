@@ -52,9 +52,9 @@ for i in range(1, num_folds + 1):
     trainfile = input_dir + '/train' + str(i) + '.txt'
     if os.path.exists(trainfile):
         os.remove(trainfile)
-if os.path.isfile(input_dir + '/test.txt')
+if os.path.isfile(input_dir + '/test.txt'):
     os.remove(input_dir + '/test.txt')
-if os.path.isfile(input_dir + '/train.txt')
+if os.path.isfile(input_dir + '/train.txt'):
     os.remove(input_dir + '/train.txt')
 
 # maintain class index
