@@ -25,4 +25,4 @@ python ./tools/fold_generator.py -I ./data-transforms/rois-sub/ -N ${THESIS_TCNN
 
 docker run --gpus all -v $(pwd)/data-transforms/rois-sub/:/workspace/data/ tcnn-trainer
 
-python ./tools/write_results_to_csv.py -A ./data-transforms/rois-sub/accuracy.out -C ./data-transforms/rois-sub/results.csv
+python ./tools/write_results_to_csv.py -A ./data-transforms/rois-sub/accuracy.out -C ./results.csv
