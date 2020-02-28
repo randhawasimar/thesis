@@ -5,19 +5,7 @@
 EXAMPLE=/workspace/examples/
 TOOLS=/opt/caffe/build/tools/
 
-$TOOLS/compute_image_mean $EXAMPLE/kth_train1_lmdb \
-  $EXAMPLE/kth_mean1.binaryproto
+$TOOLS/compute_image_mean $EXAMPLE/kth_train_lmdb \
+  $EXAMPLE/kth_mean.binaryproto
 
-$TOOLS/compute_image_mean $EXAMPLE/kth_train2_lmdb \
-  $EXAMPLE/kth_mean2.binaryproto
-
-$TOOLS/compute_image_mean $EXAMPLE/kth_train3_lmdb \
-  $EXAMPLE/kth_mean3.binaryproto
-
-$TOOLS/compute_image_mean $EXAMPLE/kth_train4_lmdb \
-  $EXAMPLE/kth_mean4.binaryproto
-
-# Link one fold
-ln -f -s  kth_mean1.binaryproto $EXAMPLE/kth_mean.binaryproto
-
-echo "Mean files created, fold 1 linked ."
+echo "Mean files created."
