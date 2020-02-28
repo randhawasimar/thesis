@@ -10,10 +10,10 @@ layer {
   transform_param {
     mirror: true
     crop_size: 227
-    mean_file: "data/kth_mean.binaryproto"
+    mean_file: "examples/kth_mean.binaryproto"
   }
   data_param {
-    source: "examples/kth_train_lmdb"
+    source: "examples/kth_test_lmdb"
     batch_size: 32
     backend: LMDB
   }
@@ -29,10 +29,10 @@ layer {
   transform_param {
     mirror: false
     crop_size: 227
-    mean_file: "data/kth_mean.binaryproto"
+    mean_file: "examples/kth_mean.binaryproto"
   }
   data_param {
-    source: "examples/kth_test_lmdb"
+    source: "examples/kth_train_lmdb"
     batch_size: 36
     backend: LMDB
   }
