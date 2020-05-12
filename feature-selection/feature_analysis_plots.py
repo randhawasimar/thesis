@@ -92,8 +92,8 @@ if plot_type == 'Mean_Range':
         x_i = 0
         y = []
         err = []
+        log.info('feature_name: ' + str(feature_name) + ' class_metrics: ' + str(class_metrics))
         for class_name, metrics in class_metrics.items():
-            log.info('metrics: ' + str(metrics))
             mean = statistics.mean(metrics)
             metric_min = min(metrics)
             metric_max = max(metrics)
