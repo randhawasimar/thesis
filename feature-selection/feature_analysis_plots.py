@@ -91,7 +91,9 @@ if plot_type == 'Mean_Range':
         x_labels = []
         x_i = 0
         y = []
-        err = []
+        lower_err = []
+        upper_err = []
+        err = [lower_err, upper_err]
         log.info('feature_name: ' + str(feature_name) + ' class_metrics: ' + str(class_metrics))
         for class_name, metrics in class_metrics.items():
             mean = statistics.mean(metrics)
@@ -101,7 +103,9 @@ if plot_type == 'Mean_Range':
             x_i = x_i + 1
             x.append(x_i * 10 / (len(class_metrics) + 2))
             y.append(mean)
-            err.append([mean - metric_min, metric_max - mean])
+            log.info('feature_name: ' + str(feature_name) + ', metric_min: ' + str(metric_min) + ', metric_max: ' + str(metric_max))
+            lower_err.append(mean - metric_min)
+            upper_err.append(metric_max - mean)
 
         f = plt.figure()
         plt.plot(x,y, 'bo', label='')
